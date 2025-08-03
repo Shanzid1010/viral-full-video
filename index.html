@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভিডিও দেখুন - এখনই! | Watch Video Now!</title>
+    
+    <meta property="og:title" content="পুরো ভিডিও দেখুন - ক্লিক করুন!">
+    <meta property="og:description" content="একবার ক্লিক করে আসল ভিডিও দেখুন।">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/007bff/ffffff?text=Watch+Video+Banner"> <meta property="og:url" content="[আপনার Vercel Landing Page Link Here]"> <meta name="twitter:card" content="summary_large_image">
+
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@700&family=Hind+Siliguri:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #E74C3C; /* Eye-catching red */
+            --dark-text: #2C3E50;
+            --light-bg: #ECF0F1; /* Light gray background */
+            --white-bg: #FFFFFF;
+            --button-shadow: rgba(231, 76, 60, 0.4);
+        }
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: var(--white-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-family: 'Baloo Da 2', cursive;
+            color: var(--primary-red);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .video-thumbnail {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .action-text {
+            font-size: 1.1em;
+            color: var(--dark-text);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .watch-button {
+            background-color: var(--primary-red);
+            color: var(--white-bg);
+            border: none;
+            border-radius: 10px;
+            padding: 18px 45px;
+            font-size: 1.8em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 20px var(--button-shadow);
+        }
+        .watch-button:hover {
+            background-color: #C0392B;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px var(--button-shadow);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .watch-button {
+                font-size: 1.5em;
+                padding: 15px 30px;
+            }
+            .container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="viral.jpg" alt="Video Thumbnail" class="video-thumbnail">
+        
+        <h1>পুরো ভিডিও দেখুন</h1>
+        <p class="action-text">Watch Full Video বাটন ক্লিক করে আসল ভিডিওটি দেখতে পারবেন।</p>
+        
+        <button id="watchVideoButton" class="watch-button">Watch Full Video</button>
+    </div>
+
+    <script>
+        const watchButton = document.getElementById('watchVideoButton');
+        const adLink = 'https://www.profitableratecpm.com/kmmnjv6pr?key=7c78bdc50316a3ba74b2eb236ed2ee2e'; // <-- এখানে আপনার Adsterra Direct Link দিন
+        const videoLink = 'https://1024terabox.com/s/1LXB_yhIRJxBgzowTfUsliw'; // <-- এখানে আপনার আসল ভিডিও লিঙ্ক দিন
+
+        // Function to handle the button click
+        function handleWatchButtonClick() {
+            let hasClickedAd = localStorage.getItem('hasClickedAd'); // Check if the flag is set in localStorage
+
+            if (!hasClickedAd) {
+                // First click: Redirect to ad link
+                localStorage.setItem('hasClickedAd', 'true'); // Set the flag
+                window.location.href = adLink;
+            } else {
+                // Subsequent clicks: Redirect to actual video link
+                window.location.href = videoLink;
+            }
+        }
+
+        // Add event listener to the button
+        watchButton.addEventListener('click', handleWatchButtonClick);
+
+
+        // --- JavaScript for Auto-Redirect from In-App Browsers (Standard Implementation) ---
+        // This function attempts to detect in-app browsers and redirect to a standard browser.
+        // NOTE: This is not 100% guaranteed to work as in-app browser policies vary and constantly update.
+        function attemptExternalRedirect() {
+            var currentUrl = window.location.href;
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Check for common in-app browser indicators (simplified)
+            var isFacebookInApp = /FBAV|FBAN|Messenger|Instagram/i.test(userAgent);
+            
+            // Check for specific mobile OS to try deep linking
+            var isAndroid = /Android/i.test(userAgent); 
+            var isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+
+            // Only attempt redirect if it's likely an in-app browser
+            if (isFacebookInApp) {
+                if (isAndroid) {
+                    window.location.href = "intent://" + currentUrl.replace(/https?:\/\//i, "") + "#Intent;scheme=https;package=com.android.chrome;end";
+                } else if (isIOS) {
+                    window.open(currentUrl, '_blank'); 
+                } else {
+                    window.open(currentUrl, '_blank');
+                }
+            }
+        }
+
+        // Trigger the redirect attempt as soon as the page loads
+        window.onload = function() {
+            setTimeout(attemptExternalRedirect, 500); // Try to redirect after 0.5 seconds
+        };
+    </script>
+</body>
+</html>
